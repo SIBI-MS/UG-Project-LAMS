@@ -4,7 +4,7 @@ prehensive web-based application designed to streamline the process of mon-
 itoring and managing student attendance while providing insights into li-
 brary usage patterns. Developed to meet the needs of educational insti-
 tutions, LAMS offers a range of features aimed at improving attendance
-tracking, data analysis, and user management.</b>
+tracking, data analysis, and user management.</b><br>
 The core functionalities of LAMS include:
 <br>
 1. RFID-Based Attendance Tracking: LAMS leverages RFID (Radio-
