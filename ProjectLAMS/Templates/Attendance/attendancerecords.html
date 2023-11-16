@@ -1,0 +1,25 @@
+{% for user in log %}
+    <tr>
+        <td>{{ user.card_id }}</td>
+        <td>{{user.admission_no}}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.department }}</td>
+        <td>{{ user.level }}</td>
+        <td>{{ user.date }}</td>
+        <td>{{ user.time_in|time:"H:i:s" }}</td>
+        {% if user.time_out %}
+            <td>{{ user.time_out|time:"H:i:s" }}</td>
+            <td>{{ user.total_hours }}</td>
+        {% else %}
+            <td></td> {# Leave this column empty if there is no time_out #}
+            <td></td> {# Leave this column empty if there is no total_hours #}
+        {% endif %}
+        <td>
+            {% if user.time_out %}
+             <span class="badge badge-danger " style="width: 110px;">Exit</span>
+            {% else %}
+                <span class="badge badge-success" style="width: 110px;">Entry</span>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}

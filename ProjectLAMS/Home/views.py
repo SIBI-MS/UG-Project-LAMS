@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Render the front page
 def front(request):
     # Render a template named 'home.html'
-    return render(request, 'home.html')
+    return render(request, 'Home/home.html')
 
 # Render the index page
 def attendancerecords(request):
