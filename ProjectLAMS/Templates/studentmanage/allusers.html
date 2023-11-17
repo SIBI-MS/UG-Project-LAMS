@@ -1,0 +1,20 @@
+    {% for user in users %}
+    {% if user.id %}
+    <TR>
+        <TD>{{ user.card_id}}</TD>
+        <TD>{{ user.admission_no}}</TD>
+        {% if user.name %}
+        <TD>{{ user.name}}</TD>
+        <TD>{{ user.department}}</TD>
+        <TD>{{ user.level}}</TD>
+        <TD>{{ user.phone}}</TD>
+        <TD>{{ user.dob}}</TD>
+        <TD>{{ user.sex}}</TD>
+        {% else %}
+        <TD></TD>
+        <TD></TD>
+        <TD></TD>
+        {% endif %}
+    </TR>
+    {% endif %}
+    {% endfor %}

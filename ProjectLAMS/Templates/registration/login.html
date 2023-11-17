@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS class for dark blue background */
+        .dark-blue-bg {
+            background-color: #001f3f;
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* Bottom container styling */
+        .bottom-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #001f3f;
+            color: white;
+            padding: 9px;
+        }
+
+        /* Card styling */
+        .card-signin {
+            border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+        }
+
+        .form-label-group input {
+            height: 3rem; /* Increase the height */
+            border-radius: 0.5rem; /* Rounded edges */
+            padding: 1rem; /* Padding for a square-shaped appearance */
+        }
+
+        .form-signin .btn {
+            font-size: 100%;
+            border-radius: 0.5rem; /* Rounded edges */
+            letter-spacing: .1rem;
+            font-weight: bold;
+            transition: all 0.2s;
+            padding: 1rem; /* Padding for a square-shaped appearance */
+        }
+        h1 {
+            font-size: 50px; /* Adjust the font size to your preference */
+            font-family:Lucida Bright; /* Change the font family to your preferred font */
+        }
+        h2 {
+            font-size: 30px; /* Adjust the font size to your preference */
+            font-family:Lucida Bright; /* Change the font family to your preferred font */
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid dark-blue-bg">
+    <h1 class="text-center">LAMS</h1>
+    <h2 class="text-center">Library Attendance Management System</h2>
+</div>
+
+<div class="container" style="margin-top: 140px;">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    {% if message %}
+                    <h6 class="text-center text-danger">Invalid Credentials</h6>
+                    {% endif %}
+                    <h5 class="card-title text-center">Sign In</h5>
+                    <form class="form-signin" action="/login/" method="post">
+                        {% csrf_token %}
+                        <div class="form-label-group">
+                            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+                        </div>
+                        <br>
+                        <div class="form-label-group">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <br>
+                        <button class="btn btn-lg btn-block" style="background-color: #001f3f; color: white;" type="submit">Sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bottom-container">
+    <p class="text-right">Not Yet Done.Under Working</p>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery, Popper.js, Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

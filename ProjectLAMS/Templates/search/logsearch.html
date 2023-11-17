@@ -1,0 +1,103 @@
+{% extends 'navigation/basic.html' %}
+
+{% block title %}log Data Logs{% endblock %}
+{% block head %}
+<style>
+    table.table thead {
+        background-color: rgb(169, 169, 169);
+        color: white; /* Text color on thead */
+    }
+    .btn {
+        background-color: #001f3f;
+        color: white; /* White text color */
+        width: 150px;
+        height:40px;
+        margin-bottom: 20px;
+    }
+
+    .btn:hover {
+        background-color: #003366;
+        color: white; /* White text color */
+    }
+
+    /* Style for the container holding the heading and button */
+    .container {
+        display: flex;
+        justify-content: space-between;
+        margin-left:700px;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<br>
+<div class="container">
+    <p style="font-size: 40px;text-align:center;">Log Based Student Data({{ selected_date }})</p>
+    <button id="downloadCSV" class="btn btn-hover">Print</button>
+</div>
+<br>
+<br>
+<table class="table table-striped" border="1">
+    <thead>
+        <tr>
+            <th>Card.No</th>
+            <th>Admission.No</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Division</th>
+            <th>Time In</th>
+            <th>Time Out</th>
+            <th>Total Time Spend</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.card_id }}</td>
+            <td>{{ log.admission_no}}</td>
+            <td>{{ log.name }}</td>
+            <td>{{ log.department }}</td>
+            <td>{{ log.level }}</td>
+            <td>{{ log.time_in }}</td>
+            <td>{{ log.time_out }}</td>
+            <td>{{ log.total_hours}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Add a hidden form to hold the table data -->
+<form id="csvForm" style="display: none;" method="post" action="{% url 'download_csv' %}">
+    {% csrf_token %}
+    <input type="hidden" id="csvData" name="csvData" value="">
+</form>
+
+<script>
+    // Function to convert the table data to CSV format
+    function tableToCSV(table) {
+        const rows = table.querySelectorAll("tr");
+        let csv = [];
+        for (const row of rows) {
+            const cols = row.querySelectorAll("td");
+            let rowText = [];
+            for (const col of cols) {
+                rowText.push(col.innerText);
+            }
+            csv.push(rowText.join(","));
+        }
+        return csv.join("\n");
+    }
+
+    // Trigger the CSV download when the "Print" button is clicked
+    document.getElementById("downloadCSV").addEventListener("click", function () {
+        const table = document.querySelector("table");
+        const csvData = tableToCSV(table);
+
+        // Populate the hidden form field with the CSV data
+        document.getElementById("csvData").value = csvData;
+
+        // Submit the form to trigger the download
+        document.getElementById("csvForm").submit();
+    });
+</script>
+{% endblock %}
+

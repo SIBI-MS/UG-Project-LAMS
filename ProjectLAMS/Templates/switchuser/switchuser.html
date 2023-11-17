@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  .container input[type="text"] {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+  body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    background-color: black;
+  }
+
+  .gray-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.7);
+    z-index: 1; /* Keep the gray overlay at the bottom */
+  }
+
+  .round-button {
+    cursor: pointer;
+    position: fixed;
+    top: 15px;
+    right: 18px;
+    background-color: transparent;
+    color: white;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    transition: 0.3s;
+    z-index: 2; /* Keep the red button above the gray overlay */
+    font-size: 30px;
+  }
+
+  .round-button:hover {
+    background-color: transparent;
+  }
+
+  .container {
+    color: white;
+    background-color: black;
+    z-index: 2; /* Keep the form above the gray overlay */
+    position: fixed;
+    bottom: 10px;
+    width: 20%;
+  }
+
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    text-align: center;
+    color: black;
+    border: 9px solid #333;
+    width: 30%;
+    height: 50%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: none;
+  }
+
+  .notification {
+    position: fixed;
+    top: -350px; /* Start off-screen at the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    width: 50%; /* Make it wider */
+    background-color: rgba(255, 255, 255, 1); /* White and transparent */
+    color: black;
+    text-align: center;
+    padding: 40px 0;
+    transition: top 0.5s; /* Add a smooth transition effect for the 'top' property */
+    z-index: 9999;
+    border-radius: 50px; /* Rounded corners for all sides */
+    display: flex;
+    justify-content: space-between; /* Align content horizontally */
+    align-items: center; /* Align content vertically */
+  }
+
+  .notification-content {
+    padding: 10px;
+    flex-grow: 1; /* Allow content to grow */
+  }
+
+  .hi-name {
+    display: flex;
+    font-weight: bold;
+    font-size: 80px; /* Adjust font size as needed */
+
+    align-items: center;
+    margin-left: 80px; /* Adjust margin for spacing */
+    margin-top: -60px; /* Adjust margin for spacing */
+  }
+
+  .hi {
+    font-weight: bold;
+    font-size: 45px; /* Adjust font size as needed */
+    margin-right: 10px; /* Adjust margin for spacing */
+    font-family: "Helvetica", sans-serif; /* Add Helvetica as the font family */
+  }
+
+  .name {
+    font-size: 45px; /* Adjust font size as needed */
+    font-family: "Helvetica", sans-serif; /* Add Helvetica as the font family */
+  }
+
+  .college-logo {
+    margin-right: 20px;
+    margin-left: 30px;
+    width: 110px;
+    height: 120px;
+    object-fit: cover;
+  }
+
+  .ans {
+
+    margin-top: 58px;
+    margin-left: -292px;
+    font-weight: bold;
+    font-size: 40px;
+    font-family: "Helvetica", sans-serif;
+  }
+
+
+</style>
+</head>
+<body>
+  <div class="notification" id="notification">
+    <img src="{% static 'images/icon6.png' %}" class="college-logo">
+    <div class="hi-name">
+        <span class="hi">Hi</span> <!-- Add "Hi" here -->
+        <span class="name">{{ ans.name }}</span> <!-- Display the name here -->
+    </div>
+    <div class="ans">
+      <span >{{ ans.ans }}</span> <!-- Display the name here -->
+    </div>
+    <div class="notification-content">
+        <span class="notification-text"></span>
+    </div>
+</div>
+
+<div class="container">
+  <form method="get" action="{% url 'process' %}" class="element">
+    <input type="text" id="card_id" name="card_id" autofocus>
+  </form>
+</div>
+<div class="popup" id="myPopup">
+  <span class="popup-text"></span>
+</div>
+
+<div class="round-button" onclick="openHome()">&#8962;</div>
+
+<!-- Render Django values as JavaScript variables -->
+<script>
+  var name = "{{ ans.name }}";
+  var ansMessage = "{{ ans.ans }}";
+
+  // Check if the current URL contains the 'process' URL
+  function isProcessURL() {
+    return window.location.href.indexOf("{% url 'process' %}") > -1;
+  }
+
+  // Function to display the notification
+  function showNotification() {
+    const notification = document.getElementById("notification");
+    const notificationText = document.querySelector(".notification-text");
+
+    notification.style.top = "10px"; // Display the notification at the top
+
+    // Hide the notification after 3000 milliseconds (3 seconds)
+    setTimeout(function () {
+      notification.style.top = "-390px"; // Move the notification off the screen
+    }, 2000);
+  }
+
+  // Call the showNotification function when the page loads on 'process' URL
+  window.addEventListener("load", function () {
+    if (isProcessURL()) {
+      showNotification();
+    }
+  });
+
+  function openHome() {
+    window.location.href = "/front";
+  }
+</script>
+
+</body>
+</html>

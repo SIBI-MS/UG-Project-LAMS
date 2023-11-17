@@ -1,0 +1,135 @@
+{% extends 'navigation/basic.html' %}
+
+{% block title %}Student Details{% endblock %}
+{% block head %}
+<style>
+    .btn {
+        background-color: #001f3f;
+        color: white;
+        border: none;
+        margin-right: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 150px;
+    }
+
+    .btn:hover {
+        background-color: #003366;
+        color: white;
+    }
+
+    table.table thead {
+        background-color: rgb(169, 169, 169);
+        color: white; /* Text color on thead */
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="text-center">
+    <br>
+    <br>
+      <p class="text-center;" style=" font-size:40px">Student Details</p>
+    <br>
+</div>
+<div class="row">
+    <div class="col-md-5" style="padding-top: 8px;">
+        <form action="{% url 'search' %}" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="number" class="form-control" name="admission_no" id="idInput" placeholder="Admission No">
+                <div class="input-group-append">
+                    <select class="form-control" name="department" id="departmentDropdown">
+                        <option value="">Department</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Zoology">Zoology</option>
+                        <option value="English">English</option>
+                        <!-- Add more departments as needed -->
+                    </select>
+                </div>
+                <div class="input-group-append">
+                    <select class="form-control" name="level" id="levelDropdown">
+                        <option value="">Level</option>
+                        <option value="UG">UG</option>
+                        <option value="PG">PG</option>
+                        <option value="Integrated PG">Integrated PG</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-hover" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div style="padding-top: 8px;">
+        <a href="/editdata" class="btn">Edit Details</a>
+        <a href="/datafs" class="btn">Upload Data</a>
+    </div>
+</div>
+
+<br>
+<table class="table table-striped" border="1">
+    <thead>
+        <tr>
+            <th>Card ID</th>
+            <th>Admission No</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Department</th>
+            <th>Level</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Adrress</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in users %}
+            <tr>
+                <td>{{ student.card_id }}</td>
+                <td>{{ student.admission_no }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.dob }}</td>
+                <td>{{ student.department }}</td>
+                <td>{{ student.level }}</td>
+                <td>{{ student.phone }}</td>
+                <td>{{ student.sex }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.address}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+  // Function to enable/disable fields based on ID input
+  function toggleFields() {
+    const idInput = $("#idInput");
+    const departmentDropdown = $("#departmentDropdown");
+    const levelDropdown = $("#levelDropdown");
+    
+    if (idInput.val() !== "") {
+      departmentDropdown.prop("disabled", true);
+      levelDropdown.prop("disabled", true);
+    } else {
+      departmentDropdown.prop("disabled", false);
+      levelDropdown.prop("disabled", false);
+    }
+  }
+
+  // Initial state: all fields are enabled
+  toggleFields();
+
+  // Enable/disable fields when ID input changes
+  $("#idInput").on("input", toggleFields);
+
+  // Add your AJAX update code here, if needed
+});
+
+</script>
+{% endblock %}

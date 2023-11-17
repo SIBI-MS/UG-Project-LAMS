@@ -1,0 +1,150 @@
+{% extends 'navigation/basic.html' %}
+
+{% block title %}Attendance Records{% endblock %}
+{%block head%}
+<style>
+  .btn{
+    background-color: #001f3f;
+    color: white; /* White text color */
+  }
+
+  .btn:hover {
+    background-color: #003366;
+    color: white; /* White text color */
+  }
+
+  /* CSS for the date picker container */
+  .date-picker-container {
+    background-color: #001f3f;
+    color: white;
+    padding: 6px 10px; /* Adjust the padding to control the width and height */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Hover effect on the date picker container */
+  .date-picker-container:hover {
+    background-color: #003366;
+    color: white;
+  }
+
+  /* Add this CSS rule to set the background color for the thead */
+  table.table thead {
+    background-color: rgb(169, 169, 169);
+    color: white; /* Text color on thead */
+  }
+</style>
+{% endblock%}
+
+{% block body %}
+<div class="container-fluid text-center">
+  <br>
+  <br>
+  <div class="center">
+    <p class="text-center;" style="font-size:40px">Attendance Records</p>
+  </div>
+  <br>
+
+  <div class="row">
+    <!-- Merged Button -->
+      <div class="col-md-6" style="padding-top: 8px;">
+        <form action="{% url 'logsrch' %}" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="number" class="form-control" name="admission_no" id="idInput" placeholder="Admission No">
+                <div class="input-group-append">
+                    <select class="form-control" name="department" id="departmentDropdown">
+                        <option value="">Department</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Zoology">Zoology</option>
+                        <option value="English">English</option>
+                        <!-- Add more departments as needed -->
+                    </select>
+                </div>
+                <div class="input-group-append">
+                    <select class="form-control" name="level" id="levelDropdown">
+                        <option value="">Level</option>
+                        <option value="UG">UG</option>
+                        <option value="PG">PG</option>
+                        <option value="Integrated PG">Integrated PG</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <input type="date" class="form-control" name="datepicker" id="datepicker">
+                <div class="input-group-append">
+                    <button class="btn btn-hover" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+<br>
+<table class="table table-striped" border="1">
+  <thead >
+    <TR>
+      <TH>Card No</TH>
+      <TH>Admission No</TH>
+      <TH>Name</TH>
+      <TH>Department</TH>
+      <TH>Division</TH>
+      <TH>Date</TH>
+      <TH>Entry Time</TH>
+      <TH>Exit Time</TH>
+      <TH>Total Hours</TH>
+      <TH>Status</TH>
+    </TR>
+  </thead>
+  <tbody id="cards" class="cards">
+  </tbody>
+</table>
+
+{% endblock %}
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    setInterval(function(){
+      $.ajax({
+        url: {% url 'index1' %}
+        }).done(function(data) {
+        $('#cards').html(data);
+      });
+    },3000);
+  });
+
+  $(document).ready(function () {
+    // Function to enable/disable fields based on ID input
+    function toggleFields() {
+      const idInput = $("#idInput");
+      const departmentDropdown = $("#departmentDropdown");
+      const levelDropdown = $("#levelDropdown");
+      const datepicker = $("#datepicker");
+      
+      if (idInput.val() !== "") {
+        departmentDropdown.prop("disabled", true);
+        levelDropdown.prop("disabled", true);
+        datepicker.prop("disabled", true);
+      } else {
+        departmentDropdown.prop("disabled", false);
+        levelDropdown.prop("disabled", false);
+        datepicker.prop("disabled", false);
+      }
+    }
+  
+    // Initial state: all fields are enabled
+    toggleFields();
+  
+    // Enable/disable fields when ID input changes
+    $("#idInput").on("input", toggleFields);
+  
+    // Add your AJAX update code here, if needed
+  });
+  
+
+</script>
+{% endblock %}
+

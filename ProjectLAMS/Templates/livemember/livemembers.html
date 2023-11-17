@@ -1,0 +1,38 @@
+{% extends 'navigation/basic.html' %}
+
+{% block title %}Live Members{% endblock %}
+{%block head%}
+<style>
+    table.table thead {
+        background-color: rgb(169, 169, 169);
+        color: white; /* Text color on thead */
+      }
+</style>
+{%endblock%}
+{% block body %}
+<br>
+<p class="text-center;" style=" font-size:40px;text-align:center;">Live Member</p>
+<br>
+<div class="container">
+    <table class="table table-striped" border="1">
+        <thead>
+            <tr>
+                <th>Admission No</th>
+                <th>Name</th>
+                <th>Division</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.admission_no }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.level }}</td>
+                    <td>{{ user.department }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

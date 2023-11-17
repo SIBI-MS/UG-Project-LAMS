@@ -1,0 +1,66 @@
+{% extends 'navigation/basic.html' %}
+
+{% block title %}Top Users{% endblock %}
+
+{% block head %}
+<style>
+    table.table thead {
+        background-color: rgb(169, 169, 169);
+        color: white; /* Text color on thead */
+    }
+</style>
+
+<!-- Include JavaScript code -->
+<script>
+    // JavaScript function to format seconds into HH:MM:SS format
+    function formatTime(seconds) {
+        var hours = Math.floor(seconds / 3600);
+        var minutes = Math.floor((seconds % 3600) / 60);
+        var remainingSeconds = seconds % 60;
+        
+        // Format the time as HH:MM:SS
+        return (
+            ("0" + hours).slice(-2) + ":" +
+            ("0" + minutes).slice(-2) + ":" +
+            ("0" + remainingSeconds).slice(-2)
+        );
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <br>
+    <p style="text-align:center;font-size:40px;">Top Users</p>
+    <br>
+    <table class="table table-striped" border="1">
+        <thead>
+            <tr>
+                <th>Card No</th>
+                <th>Admission No</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Division</th>
+                <th>Total Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.card_id }}</td>
+                <td>{{ user.admission_no }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.department }}</td>
+                <td>{{ user.level }}</td>
+                <!-- Convert time_spend (seconds) to HH:MM:SS format using the JavaScript function -->
+                <td>
+                    <script>
+                        document.write(formatTime({{ user.time_spend }}));
+                    </script>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

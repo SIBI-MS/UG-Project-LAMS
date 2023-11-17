@@ -1,0 +1,46 @@
+{% extends 'navigation/basic.html' %}
+
+{% block title %}Student Data{% endblock %}
+{% block head %}
+<style>
+    table.table thead {
+        background-color: rgb(169, 169, 169);
+        color: white; /* Text color on thead */
+    }
+</style>
+{% endblock %}
+{% block body %}
+<br>
+<div class="center">
+    <p class="text-center;" style="font-family: Georgia, serif; font-size:40px;text-align:center;">Student Data</p>
+</div>
+<br>
+<table class="table table-striped" border="1">
+    <thead >
+        <tr>
+            <th>Card.No</th>
+            <th>Admission.No</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Division</th>
+            <th>Phone Number</th>
+            <th>DOB</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.card_id }}</td>
+            <td>{{ student.admission_no}}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.department }}</td>
+            <td>{{ student.level }}</td>
+            <td>{{ student.phone }}</td>
+            <td>{{ student.dob }}</td>
+            <td>{{ student.sex }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

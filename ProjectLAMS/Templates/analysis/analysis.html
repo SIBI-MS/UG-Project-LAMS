@@ -1,0 +1,100 @@
+{% extends 'navigation/basic.html' %}
+
+{% block title %}Analysis{% endblock %}
+
+{% block head %}
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+            <h1 class="text-center">Analysis</h1>
+<br>
+<div class="container">
+    <br>
+    <h1 class="text-center">Departmental Analysis - Number of Students</h1>
+    <br>
+    <canvas id="studentCountChart" width="400" height="200"></canvas>
+</div>
+<div class="container">
+    <br>
+    <h1 class="text-center">Departmental Analysis - Total Time Spent</h1>
+    <br>
+    <canvas id="totalTimeChart" width="400" height="200"></canvas>
+</div>
+
+<script>
+    // Get department names and total times from Django context
+    var departmentsTotalTime = {{ departments|safe }};
+    var totalTimes = {{ total_times|safe }};
+
+    // Log the data to the browser console for debugging
+    console.log(departmentsTotalTime);
+    console.log(totalTimes);
+
+    // Create a bar chart for total time spent
+    var ctxTotalTime = document.getElementById('totalTimeChart').getContext('2d');
+    var totalTimeChart = new Chart(ctxTotalTime, {
+        type: 'bar',
+        data: {
+            labels: departmentsTotalTime,
+            datasets: [{
+                label: 'Total Time Spent (minutes)',
+                data: totalTimes,
+                backgroundColor: 'rgba(192, 75, 75, 0.5)', // Custom background color
+                borderColor: 'rgba(192, 75, 75, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            animation: {
+                duration: 2000, // Animation duration in milliseconds
+                easing: 'easeInOutQuart' // Easing function for animation
+            }
+        }
+    });
+</script>
+<script>
+    // Get department names and student counts from Django context
+    var departmentsStudentCount = {{ departments|safe }};
+    var studentCounts = {{ student_counts|safe }};
+
+    // Log the data to the browser console for debugging
+    console.log(departmentsStudentCount);
+    console.log(studentCounts);
+
+    // Create a bar chart for the number of students
+    var ctxStudentCount = document.getElementById('studentCountChart').getContext('2d');
+    var studentCountChart = new Chart(ctxStudentCount, {
+        type: 'bar',
+        data: {
+            labels: departmentsStudentCount,
+            datasets: [{
+                label: 'Number of Students',
+                data: studentCounts,
+                backgroundColor: 'rgba(75, 192, 192, 0.5)', // Custom background color
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            animation: {
+                duration: 2000, // Animation duration in milliseconds
+                easing: 'easeInOutQuart' // Easing function for animation
+            }
+        }
+    });
+</script>
+{% endblock %}
