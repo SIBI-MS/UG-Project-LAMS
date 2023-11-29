@@ -98,11 +98,11 @@ def process(request):
             # If a matching user is found, log attendance using the 'attend' function and return the response
             ans = attend(user)
             context = {'name': name, 'ans': ans}
-            return render(request, 'attendance/switchuser.html', {'ans': context})
+            return render(request, 'switchuser/switchuser.html', {'ans': context})
     
     # If the card is not found among registered users, return a message to register it as a new user
     ans='Card is not found, register it as a new user'
-    return render(request, 'attendance/switchuser.html', {'ans': ans})
+    return render(request, 'switchuser/switchuser.html', {'ans': ans})
 
 
 

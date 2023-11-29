@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   .container input[type="text"] {
@@ -10,68 +12,24 @@
     opacity: 0;
   }
   body {
-    font-family: "Lato", sans-serif;
-    margin: 0;
-    background-color: black;
-  }
+      background-color: rgba(0, 119, 192, .9);
+      background-repeat: no-repeat;
+    }
 
-  .gray-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(128, 128, 128, 0.7);
-    z-index: 1; /* Keep the gray overlay at the bottom */
-  }
-
-  .round-button {
-    cursor: pointer;
-    position: fixed;
-    top: 15px;
-    right: 18px;
-    background-color: transparent;
-    color: white;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    transition: 0.3s;
-    z-index: 2; /* Keep the red button above the gray overlay */
-    font-size: 30px;
-  }
-
-  .round-button:hover {
-    background-color: transparent;
-  }
-
-  .container {
-    color: white;
-    background-color: black;
-    z-index: 2; /* Keep the form above the gray overlay */
-    position: fixed;
-    bottom: 10px;
-    width: 20%;
-  }
-
-  .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    text-align: center;
-    color: black;
-    border: 9px solid #333;
-    width: 30%;
-    height: 50%;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
-    z-index: 9999;
-    display: none;
-  }
-
+    body::before {
+      background-repeat: no-repeat;
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('{% static "images/photo_2023-11-04_21-20-05-removebg-preview.png" %}');
+      opacity: 0.5; /* Adjust the opacity as needed */
+      background-position: center;
+      background-size: 25%;
+      top: 32pxpx;
+    }
   .notification {
     position: fixed;
     top: -350px; /* Start off-screen at the top */
@@ -80,77 +38,93 @@
     width: 50%; /* Make it wider */
     background-color: rgba(255, 255, 255, 1); /* White and transparent */
     color: black;
-    text-align: center;
     padding: 40px 0;
     transition: top 0.5s; /* Add a smooth transition effect for the 'top' property */
-    z-index: 9999;
     border-radius: 50px; /* Rounded corners for all sides */
+
     display: flex;
-    justify-content: space-between; /* Align content horizontally */
-    align-items: center; /* Align content vertically */
+   
+  
   }
 
-  .notification-content {
-    padding: 10px;
-    flex-grow: 1; /* Allow content to grow */
-  }
-
-  .hi-name {
-    display: flex;
-    font-weight: bold;
-    font-size: 80px; /* Adjust font size as needed */
-
-    align-items: center;
-    margin-left: 80px; /* Adjust margin for spacing */
-    margin-top: -60px; /* Adjust margin for spacing */
-  }
 
   .hi {
-    font-weight: bold;
-    font-size: 45px; /* Adjust font size as needed */
-    margin-right: 10px; /* Adjust margin for spacing */
-    font-family: "Helvetica", sans-serif; /* Add Helvetica as the font family */
-  }
+    top: -20px;
+  margin-left: 40px;
+  position: relative;
+  font-weight: bold;
+  font-size: 45px; /* Adjust font size as needed */
+  font-family: "Helvetica";
+}
 
-  .name {
-    font-size: 45px; /* Adjust font size as needed */
-    font-family: "Helvetica", sans-serif; /* Add Helvetica as the font family */
-  }
+.ans {
+  margin-left: 40px;
+  position: relative;
+   /* Adjust this value to move ans.name up */
+  font-weight: bold;
+  font-size: 40px;
+  font-family: "Helvetica";
+}
 
   .college-logo {
-    margin-right: 20px;
+    
     margin-left: 30px;
-    width: 110px;
-    height: 120px;
-    object-fit: cover;
+    width: 135px;
+    height: 130px;
+    
   }
+  .text-box {
+  position: fixed;
+  bottom: -50px; /* Adjust the distance from the bottom as needed */
+  left: 10px; /* Adjust the distance from the left as needed */
+  z-index: 999; /* Ensure it's above other content */
+  text-align: left;
+}
 
-  .ans {
+.anime {
+  color: rgb(231, 231, 231);
+    font-size: 40px; /* Adjust the font size as needed */
+  font-family: Courier;
+}
 
-    margin-top: 58px;
-    margin-left: -292px;
-    font-weight: bold;
-    font-size: 40px;
-    font-family: "Helvetica", sans-serif;
-  }
+.auto-input {
+  font-family: Courier;
+  font-size: 40px; /* Adjust the font size as needed */
+}
+.round-button {
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  right: 18px;
+  background-color: transparent;
+  color: white;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  transition: 0.3s;
+  z-index: 2; /* Keep the red button above the gray overlay */
+  font-size: 30px;
+}
 
+.round-button:hover {
+  background-color: transparent;
+}
 
 </style>
 </head>
 <body>
   <div class="notification" id="notification">
-    <img src="{% static 'images/icon6.png' %}" class="college-logo">
-    <div class="hi-name">
-        <span class="hi">Hi</span> <!-- Add "Hi" here -->
-        <span class="name">{{ ans.name }}</span> <!-- Display the name here -->
-    </div>
-    <div class="ans">
-      <span >{{ ans.ans }}</span> <!-- Display the name here -->
-    </div>
-    <div class="notification-content">
-        <span class="notification-text"></span>
-    </div>
-</div>
+    <img src="{% static 'images/photo_2023-11-04_21-20-05-removebg-preview.png' %}" class="college-logo">
+    <h1>
+      <span style="color:  #0077c0;" class="hi"><span style="color: black;">Hi</span> {{ ans.name }}</span>
+      <br>
+      <span class="ans">{{ ans.ans }}</span>
+    </h1>
+  </div>
+  
+  
+  
 
 <div class="container">
   <form method="get" action="{% url 'process' %}" class="element">
@@ -160,9 +134,13 @@
 <div class="popup" id="myPopup">
   <span class="popup-text"></span>
 </div>
-
+<div class="text-box">
+  <h1 class="anime" style="font-size: 90px;"><span class="auto-input" style="font-size: 90px;"></span></h1>
+</div>
 <div class="round-button" onclick="openHome()">&#8962;</div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <!-- Render Django values as JavaScript variables -->
 <script>
   var name = "{{ ans.name }}";
@@ -197,6 +175,13 @@
     window.location.href = "/front";
   }
 </script>
-
+<script>
+  let typed = new Typed(".auto-input", {
+    strings: ["scan your card below!"],
+    typeSpeed: 100,
+    backSpeed: 100,
+    loop: true
+  })
+</script>
 </body>
 </html>
