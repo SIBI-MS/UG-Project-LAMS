@@ -1,4 +1,4 @@
-The LAMS(Library Attendance Management System)<br> is a com-
+The <h1>LAMS(Library Attendance Management System)</h1><br> is a com-
 prehensive web-based application designed to streamline the process of mon-
 itoring and managing student attendance while providing insights into li-
 brary usage patterns. Developed to meet the needs of educational insti-
