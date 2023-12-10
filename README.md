@@ -5,8 +5,8 @@ brary usage patterns. Developed to meet the needs of educational insti-
 tutions, LAMS offers a range of features aimed at improving attendance
 tracking, data analysis, and user management.<br><br>
 The core functionalities of LAMS include:<br>
-<li>
-  1. RFID-Based Attendance Tracking: LAMS leverages RFID (Radio-
+
+  <b>1.</b> RFID-Based Attendance Tracking: LAMS leverages RFID (Radio-
 Frequency Identification) technology to facilitate seamless and accu-
 rate attendance tracking. Each student’s ID card is equipped with an
 RFID tag, allowing for automated and efficient attendance recording
@@ -26,4 +26,4 @@ insights into library resource utilization.<br>
 brary members, making it easier to manage library access and resources
 effectively by providing information about current students inside the
 library.
-</li>
+
