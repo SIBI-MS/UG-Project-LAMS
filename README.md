@@ -26,9 +26,6 @@ LAMS is a comprehensive web-based application designed to streamline the process
 
 Contributions are welcome! Please feel free to submit pull requests or open issues for any features or bug fixes.
 
-## License 📝
-
-This project is licensed under the MIT License.
 
 ## Acknowledgements 🙏
 
