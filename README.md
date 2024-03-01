@@ -1,6 +1,6 @@
 # LAMS (Library Attendance Management System) 📚
 ![LAMS](ProjectLAMS/photo_2024-03-01_22-05-27.jpg)
-LAMS is a comprehensive web-based application designed to streamline the process of monitoring and managing student attendance while providing insights into library usage patterns. Developed to meet the needs of educational institutions, LAMS offers a range of features aimed at improving attendance tracking, data analysis, and user management.
+LAMS is a comprehensive web-based application designed to streamline the process of monitoring and managing student attendance while providing insights into library usage patterns. Developed as a graduation project for the 6th semester, LAMS offers a range of features aimed at improving attendance tracking, data analysis, and user management.
 
 ## Key Features 🚀
 
@@ -26,6 +26,9 @@ LAMS is a comprehensive web-based application designed to streamline the process
 
 Contributions are welcome! Please feel free to submit pull requests or open issues for any features or bug fixes.
 
+## License 📝
+
+This project is licensed under the MIT License.
 
 ## Acknowledgements 🙏
 
